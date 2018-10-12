@@ -63,7 +63,7 @@ RSpec.describe 'Jobs API' do
 
   # Test suite for PUT /clients/:client_id/jobs
   describe 'POST /clients/:client_id/jobs' do
-    let(:valid_attributes) { { name: 'Visit Narnia', done: false } }
+    let(:valid_attributes) { { form: 1, job_type: 1, price: 100.00 } }
 
     context 'when request attributes are valid' do
       before { post "/clients/#{client_id}/jobs", params: valid_attributes }
@@ -81,14 +81,14 @@ RSpec.describe 'Jobs API' do
       end
 
       it 'returns a failure message' do
-        expect(response.body).to match(/Validation failed: Name can't be blank/)
+        expect(response.body).to match(/Validation failed: Form can't be blank, Job type can't be blank/)
       end
     end
   end
 
   # Test suite for PUT /clients/:client_id/jobs/:id
   describe 'PUT /clients/:client_id/jobs/:id' do
-    let(:valid_attributes) { { name: 'Mozart' } }
+    let(:valid_attributes) { { form: 1, job_type: 1, price: 100.00 } }
 
     before { put "/clients/#{client_id}/jobs/#{id}", params: valid_attributes }
 
@@ -99,7 +99,7 @@ RSpec.describe 'Jobs API' do
 
       it 'updates the job' do
         updated_job = Job.find(id)
-        expect(updated_job.name).to match(/Mozart/)
+        expect(updated_job.price).to match(100.00)
       end
     end
 
