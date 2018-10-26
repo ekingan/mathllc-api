@@ -2,18 +2,17 @@ class AuthorizeApiRequest
   def initialize(headers = {})
     @headers = headers
   end
-
-  attr_reader :headers
-
+  
   # Service entry point - return valid user object
   def call
     {
       user: user
     }
   end
-
+  
   private
-
+  
+  attr_reader :headers
 
   def user
     # check if user is in the database

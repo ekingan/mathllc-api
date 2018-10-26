@@ -4,13 +4,13 @@ class ClientsController < ApplicationController
 
   # GET /clients
   def index
-    @clients = Client.all
+    @clients = current_user.clients
     json_response(@clients)
   end
 
   # POST /clients
   def create
-    @client = Client.create!(client_params)
+    @client = current_user.clients.create!(client_params)
     json_response(@client, :created)
   end
 
